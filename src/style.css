@@ -155,6 +155,17 @@
   max-height: 820px;
 }
 
+.top-row{
+  display: flex;
+  gap:10px;
+}
+
+.bottom-row{
+  display: flex;
+  gap:10px;
+}
+
+
 /* Card-style Boxes */
 .circle-graph, .earnings-overview{
   background-color: #ffffff;
@@ -199,6 +210,7 @@ button {
   color: white;
   cursor: pointer;
   transition: background 0.2s;
+  font-family:  Tahoma, Geneva, sans-serif; 
 }
 
 button:hover {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCommissionCalculator } from './commission';
+import{useTeamLeaderCalc} from './teamleader';
 
 function Calculator() {
   const [showRevshare, setShowRevshare] = useState(false);
@@ -17,6 +18,24 @@ function Calculator() {
   totalValueCommission
 } = useCommissionCalculator();
 
+  const{
+    teamMembers,
+    setTeamMembers,
+    transactionsMember,
+    setTransactionsMember,
+    averageHomeSale,
+    setAverageHomeSale,
+    averageCommission,
+    setAverageCommission,
+    percentageCappers,
+    setPercentageCappers,
+    percentage,
+    setPercentage,
+    totalTeamLeader,
+} = useTeamLeaderCalc();
+
+  const totalValueCommission2 = Math.max(0, totalValueCommission);
+  const averageVolume2 = Math.max(0,averageVolume)
 
   return (
     <>
@@ -36,13 +55,14 @@ function Calculator() {
             <div className="earnings-overview">
               <h2> Earnings Overview</h2>
               <p>Comission Income:</p>
-              <p>Revenue Share Income: ${totalValueCommission.toLocaleString()}</p>
+              <p>Team Leader Income:${totalTeamLeader.toLocaleString()}</p>
+              <p>Revenue Share Income: ${totalValueCommission2.toLocaleString()}</p>
             </div>
           </div>
 
           {/* Commission Income */}
           <div className="commission-income">
-            <h2>Comission Income</h2>
+            <h2>Commission Income</h2>
             <hr className="divider"></hr>
             <p> Are you a Half Capper of Full Capper?</p>
             <select 
@@ -54,7 +74,7 @@ function Calculator() {
             </select>
             <h3>Individual</h3>
             <p>What is your average home sales price?</p>
-            <input type="range"></input>
+            <input type="range" min="0" max="5000000" value={averageHomePrice} onChange={(e) => setAverageHomePrice(Number(e.target.value))}></input>
             <div className="dollar-sign">
               <span className="dollar">$</span>
               <input 
@@ -65,12 +85,12 @@ function Calculator() {
               ></input>
             </div>
             <p>How many transactions per years?</p>
-            <input type="range"></input>
-            <div className="transactions">
+            <input type="range" min="0" max="150" value={averageTransactions} onChange={(e) => setAverageTransactions(Number(e.target.value))}></input>
+              <div className="transactions">
               <span className="transactions-sign">↹</span>
               <input type="text" placeholder="0" value={averageTransactions} onChange={(e) => setAverageTransactions(Number(e.target.value))}></input>
             </div>
-            <h4>Volume per year: ${averageVolume.toLocaleString()}</h4> 
+            <h4>Volume per year: ${averageVolume2.toLocaleString()}</h4> 
             <p>What is the average commission charged on one end of a deal?</p>
             <div className="percentage">
               <span className="percentage-sign">%</span>
@@ -78,7 +98,7 @@ function Calculator() {
             </div>
             <hr className="divider"></hr>
             <h4>Total Value:</h4>
-            <p>${totalValueCommission.toLocaleString()}</p>
+            <p>${totalValueCommission2.toLocaleString()}</p>
           </div>
         </div>
 
@@ -103,19 +123,19 @@ function Calculator() {
               <div>
                 <hr className="divider"></hr>
                 <p>How many team members will you have?</p>
-                <input></input>
+                <input type="number" placeholder="0" value={teamMembers} onChange={(e)=>setTeamMembers(Number(e.target.value))}></input>
                 <p>How many transactions will each team member close per year?</p>
-                <input></input>
+                <input type="number" placeholder="0" value={transactionsMember} onChange={(e)=>setTransactionsMember(Number(e.target.value))}></input>
                 <p>What percentage of these team members are half cappers?</p>
-                <input></input>
+                <input type="number" placeholder="0" value={percentageCappers} onChange={(e)=>setPercentageCappers(Number(e.target.value))}></input>
                 <p>What is the average home sales price?</p>
-                <input></input>
+                <input type="numbers" placeholder="0" value={averageHomeSale} onChange={(e)=>setAverageHomeSale(Number(e.target.value))}></input>
                 <p>What is the average commission charged on one end of a deal?</p>
-                <input></input>
+                <input type="numbers" placeholder="0" value={averageCommission} onChange={(e)=>setAverageCommission(Number(e.target.value))}></input>
                 <p>What percentage is yours?</p>
-                <input></input>
+                <input type="number" placeholder="0" value={percentage} onChange={(e)=>setPercentage(Number(e.target.value))}></input>
                 <hr className="divider"></hr>
-                <h3>Total Value: $0</h3> {/*Put a value here*/}
+                <h3>Total Value: ${totalTeamLeader.toLocaleString()}</h3>
               </div>
             )}
           </div>
@@ -138,19 +158,23 @@ function Calculator() {
               <div>
                 <hr className="divider"></hr>
                 <h2>Add agent count in each level (below)</h2>
+                <div className="top-row">
                 <button>Level 1</button>
                 <button>Level 2</button>
                 <button>Level 3</button>
+                </div>
+                <div className="bottom-row">
                 <button>Level 4</button>
                 <button>Level 5</button>
                 <button>Infinity</button>
+                </div>
                 <h4>Expected Earning: $0</h4> {/*Put a value here later*/}
                 <p>Expected count of Level 1 agents in your network</p>
                 <input></input>
                 <p>Expected Annual percentage of your network?</p>
                 <input></input>
                 <hr className="divider"></hr>
-                <h2>Total value: $0</h2> {/*Put a value here later*/}
+                <h3>Total value: $0</h3> {/*Put a value here later*/}
               </div>
             )}
           </div>
