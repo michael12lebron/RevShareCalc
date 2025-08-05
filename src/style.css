@@ -118,7 +118,6 @@
   transform: translateX(24px);
 }
 
-
 /*.............*/
 
 .second-section{
@@ -155,6 +154,26 @@
   max-height: 820px;
 }
 
+.levels1,.levels2{
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+.levels1 h4, .levels2 h4 {
+  width: 180px; /* 👈 force equal box width */
+  min-height: 40px; /* optional: make all heights consistent */
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
 .top-row{
   display: flex;
   gap:10px;
@@ -165,6 +184,30 @@
   gap:10px;
 }
 
+/*Revshare Buttons*/
+
+/* Base button style */
+.revButton {
+  transition: all 0.2s ease-in-out;
+  background-color: #1d375f;
+  color: white;
+  cursor: pointer;
+  font-family: Tahoma, Geneva, sans-serif;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin: 6px;
+}
+
+/* Active (clicked) button style */
+.revButton.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+
+
+/*.................*/
 
 /* Card-style Boxes */
 .circle-graph, .earnings-overview{
